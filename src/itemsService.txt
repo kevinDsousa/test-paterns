@@ -1,0 +1,5 @@
+const itemsData = require('./itemsData');
+
+exports.getItens = function () {
+    return itemsData.getItems();
+}

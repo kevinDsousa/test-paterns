@@ -1,0 +1,37 @@
+const { spy } = require("sinon");
+const itemsData = require("../src/itemsData");
+const itemsService = require("../src/itemsService");
+const sinon = require("sinon");
+const mock = require("sinon/lib/sinon/mock.js");
+
+test("Deve obter os itens",async function () {
+    const items = await itemsService.getItens();
+    expect(items).toHavelength(3);
+})  
+
+//criar um stub é uma maneira de substituir alterar o comportamento de uma função por outro comportamento
+test("Deve obter os itens com stub",async function () {
+    sinon.stub(itemsData, "getItems").returns([ { id_item: 1 } ]);
+    const items = await itemsService.getItens();
+    expect(items).toHavelength(3);
+    sinon.restore();
+})  
+
+
+//criar um spy é uma maneira de monitorar uma função
+test("Deve obter os itens com spy",async function () {
+    sinon.spy(itemsData, "getItems");
+    const items = await itemsService.getItens();
+    sinon.assert.calledOnce(spy);
+    sinon.restore();
+})  
+
+//criar um mock é programar um objeto que simula o comportamento de um objeto real
+test("Deve obter os itens com mock",async function () {
+    sinon.stub(itemsService, "getItens")
+    mock.expects("getItens").once().returns([ { id_item: 1 } ]);
+    const items = await itemsService.getItens();
+    expects(items).toHavelength(1);
+    mock.verify();
+    sinon.restore();
+})  

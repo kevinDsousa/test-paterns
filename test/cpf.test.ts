@@ -12,7 +12,7 @@ const invalidCpfsWithSameDigits = [
 
 describe.each(invalidCpfsWithSameDigits)("Deve testar um cpf invalido com todos os digitos iguais", function (cpf) {
     test(`CPF ${cpf} deve ser invalido`, function () {
-        expect(() => new CPF(cpf)).toThrow(new Error("CPF inválido"))
+        expect(() => new CPF(cpf)).toThrow(new Error("CPF inválido"));
     })
 });
 
